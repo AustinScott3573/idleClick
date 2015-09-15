@@ -2,11 +2,12 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, '');
 
 game.state.add('play', {
     preload: function() {
-        this.game.load.image('forest-back', 'assets/parallax_forest_pack/layers/parallax-forest-back-trees.png');
-        this.game.load.image('forest-lights', 'assets/parallax_forest_pack/layers/parallax-forest-lights.png');
-        this.game.load.image('forest-middle', 'assets/parallax_forest_pack/layers/parallax-forest-middle-trees.png');
-        this.game.load.image('forest-front', 'assets/parallax_forest_pack/layers/parallax-forest-front-trees.png');
-
+        // this.game.load.image('forest-back', 'assets/allacrost_enemy_sprites/natureBackground.gif');
+        this.game.load.image('forest-back', 'assets/parallax_forest_pack/layers/background2.jpg');
+        // this.game.load.image('forest-lights', 'assets/parallax_forest_pack/layers/parallax-forest-lights.png');
+        // this.game.load.image('forest-middle', 'assets/parallax_forest_pack/layers/parallax-forest-middle-trees.png');
+        // this.game.load.image('forest-front', 'assets/parallax_forest_pack/layers/parallax-forest-front-trees.png');
+        this.game.load.spritesheet('hero', 'assets/sprites/heroes.png', 128, 128, 24);
         this.game.load.image('aerocephal', 'assets/allacrost_enemy_sprites/aerocephal.png');
         this.game.load.image('arcana_drake', 'assets/allacrost_enemy_sprites/arcana_drake.png');
         this.game.load.image('aurum-drakueli', 'assets/allacrost_enemy_sprites/aurum-drakueli.png');
@@ -63,14 +64,19 @@ game.state.add('play', {
     create: function() {
         var state = this;
 
+
         this.background = this.game.add.group();
         // setup each of our background layers to take the full screen
-        ['forest-back', 'forest-lights', 'forest-middle', 'forest-front']
+        ['forest-back']
             .forEach(function(image) {
-                var bg = state.game.add.tileSprite(0, 0, state.game.world.width,
+                var bg = state.game.add.tileSprite(1, 1, state.game.world.width,
                     state.game.world.height, image, '', state.background);
-                bg.tileScale.setTo(4,4);
+                bg.tileScale.setTo(1,1);
             });
+
+        var hero = game.add.sprite(650, 400, 'hero');
+        var walk = hero.animations.add('fight');
+        hero.animations.play('fight', 12, true);
 
         this.upgradePanel = this.game.add.image(10, 70, this.game.cache.getBitmapData('upgradePanel'));
         var upgradeButtons = this.upgradePanel.addChild(this.game.add.group());
@@ -143,8 +149,8 @@ game.state.add('play', {
 
         this.monsterInfoUI = this.game.add.group();
         this.monsterInfoUI.position.setTo(this.currentMonster.x - 220, this.currentMonster.y + 120);
-        this.monsterNameText = this.monsterInfoUI.addChild(this.game.add.text(0, 0, this.currentMonster.details.name, {
-            font: '48px Arial Black',
+        this.monsterNameText = this.monsterInfoUI.addChild(this.game.add.text(0, 20, this.currentMonster.details.name, {
+            font: '36px Arial Black',
             fill: '#fff',
             strokeThickness: 4
         }));
@@ -187,7 +193,7 @@ game.state.add('play', {
         this.playerGoldText = this.add.text(30, 30, 'Gold: ' + this.player.gold, {
             font: '24px Arial Black',
             fill: '#fff',
-            strokeThickness: 4
+            strokeThickness: 4     
         });
 
         // 100ms 10x a second
