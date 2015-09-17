@@ -24,11 +24,15 @@ game.state.add('play', {
         this.game.load.image('snake', 'assets/allacrost_enemy_sprites/snake.png');
         this.game.load.image('spider', 'assets/allacrost_enemy_sprites/spider.png');
         this.game.load.image('stygian_lizard', 'assets/allacrost_enemy_sprites/stygian_lizard.png');
+        
 
         this.game.load.image('gold_coin', 'assets/496_RPG_icons/I_GoldCoin.png');
 
         this.game.load.image('dagger', 'assets/496_RPG_icons/W_Dagger002.png');
         this.game.load.image('swordIcon1', 'assets/496_RPG_icons/S_Sword15.png');
+        this.game.load.image('swordIcon2', 'assets/496_RPG_icons/S_Sword16.png');
+        this.game.load.image('swordIcon3', 'assets/496_RPG_icons/S_Sword20.png');
+
 
         // build panel for upgrades
         var bmd = this.game.add.bitmapData(250, 500);
@@ -88,6 +92,12 @@ game.state.add('play', {
             }},
             {icon: 'swordIcon1', name: 'Auto-Attack', level: 0, cost: 25, purchaseHandler: function(button, player) {
                 player.dps += 5;
+            }},
+            {icon: 'swordIcon2', name: 'More DPS', level: 0, cost: 50, purchaseHandler: function(button, player) {
+                player.dps += 10;
+            }},
+            {icon: 'swordIcon3', name: 'Even More DPS', level: 0, cost: 150, purchaseHandler: function(button, player) {
+                player.dps += 25;
             }}
         ];
 
@@ -120,6 +130,8 @@ game.state.add('play', {
             {name: 'Snake',             image: 'snake',             maxHealth: 4},
             {name: 'Spider',            image: 'spider',            maxHealth: 4},
             {name: 'Stygian Lizard',    image: 'stygian_lizard',    maxHealth: 20}
+
+
         ];
         this.monsters = this.game.add.group();
 
