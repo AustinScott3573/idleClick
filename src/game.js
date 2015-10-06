@@ -78,9 +78,9 @@ game.state.add('play', {
                 bg.tileScale.setTo(1,1);
             });
 
-        var hero = game.add.sprite(650, 400, 'hero');
-        var walk = hero.animations.add('fight');
-        hero.animations.play('fight', 12, true);
+        // var hero = game.add.sprite(650, 400, 'hero');
+        // var walk = hero.animations.add('fight');
+        // hero.animations.play('fight', 12, true);
 
         this.upgradePanel = this.game.add.image(10, 70, this.game.cache.getBitmapData('upgradePanel'));
         var upgradeButtons = this.upgradePanel.addChild(this.game.add.group());
@@ -92,6 +92,10 @@ game.state.add('play', {
             }},
             {icon: 'swordIcon1', name: 'Auto-Attack', level: 0, cost: 25, purchaseHandler: function(button, player) {
                 player.dps += 5;
+                var hero = game.add.sprite(650, 400, 'hero');
+                var walk = hero.animations.add('fight');
+                hero.animations.play('fight', 12, true);
+
             }},
             {icon: 'swordIcon2', name: 'More DPS', level: 0, cost: 50, purchaseHandler: function(button, player) {
                 player.dps += 10;
